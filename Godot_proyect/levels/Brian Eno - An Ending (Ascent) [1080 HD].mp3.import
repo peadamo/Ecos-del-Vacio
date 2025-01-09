@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b77ew7wilm8cg"
+path="res://.godot/imported/Brian Eno - An Ending (Ascent) [1080 HD].mp3-353ad628cd09bbe7e4b26dcc86df84d2.mp3str"
+
+[deps]
+
+source_file="res://levels/Brian Eno - An Ending (Ascent) [1080 HD].mp3"
+dest_files=["res://.godot/imported/Brian Eno - An Ending (Ascent) [1080 HD].mp3-353ad628cd09bbe7e4b26dcc86df84d2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

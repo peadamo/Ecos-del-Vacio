@@ -1,0 +1,4336 @@
+[gd_scene load_steps=485 format=3 uid="uid://7p8flby2hnw"]
+
+[ext_resource type="Texture2D" uid="uid://ckjymhjllynfi" path="res://levels/plain_starfield_no_haze_1.png" id="1_axc7a"]
+[ext_resource type="Script" path="res://levels/void_scene.gd" id="1_gvpsq"]
+[ext_resource type="PackedScene" uid="uid://pbry8habl1m5" path="res://scenes/player/player.tscn" id="2_j3o5r"]
+[ext_resource type="PackedScene" uid="uid://4xffw2f0b0tx" path="res://levels/floor.tscn" id="3_rw22d"]
+[ext_resource type="Shader" uid="uid://cqebtyegpn16x" path="res://levels/dreamball_shader.tres" id="5_etotv"]
+[ext_resource type="AudioStream" uid="uid://cnthmff1nisi4" path="res://levels/Hollow Knight OST - Abyss.mp3" id="5_oxtuh"]
+[ext_resource type="PackedScene" uid="uid://cg78ocaf0wywv" path="res://levels/Orbes.tscn" id="5_plx1v"]
+[ext_resource type="Script" path="res://levels/orbes.gd" id="6_lcrpy"]
+[ext_resource type="AudioStream" uid="uid://b77ew7wilm8cg" path="res://levels/Brian Eno - An Ending (Ascent) [1080 HD].mp3" id="7_xd08m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v7qad"]
+sky_top_color = Color(0.0862745, 0.054902, 0.109804, 1)
+sky_horizon_color = Color(0.737255, 0.603922, 0.65098, 1)
+sky_curve = 0.0208044
+sky_energy_multiplier = 0.65
+sky_cover = ExtResource("1_axc7a")
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.386639, 0.279411, 0.318802, 1)
+ground_curve = 0.0492456
+
+[sub_resource type="Sky" id="Sky_u0va4"]
+sky_material = SubResource("ProceduralSkyMaterial_v7qad")
+process_mode = 3
+
+[sub_resource type="Environment" id="Environment_ru7rd"]
+background_mode = 2
+sky = SubResource("Sky_u0va4")
+tonemap_mode = 3
+tonemap_exposure = 0.58
+ssr_enabled = true
+glow_enabled = true
+glow_intensity = 5.29
+glow_strength = 0.49
+glow_bloom = 0.25
+glow_blend_mode = 0
+glow_hdr_threshold = 0.0
+glow_hdr_scale = 0.0
+glow_hdr_luminance_cap = 256.0
+fog_enabled = true
+fog_light_color = Color(0.29744, 0.0438551, 0.229716, 1)
+fog_light_energy = 1.5
+fog_density = 0.0181
+fog_aerial_perspective = 0.58
+fog_sky_affect = 0.055
+volumetric_fog_density = 0.0
+
+[sub_resource type="Gradient" id="Gradient_xkxf6"]
+offsets = PackedFloat32Array(0.223301, 0.475728, 0.796117, 1)
+colors = PackedColorArray(0.486228, 0.211559, 0.0963089, 1, 0.651132, 0.389627, 0.129675, 1, 0.678651, 0.651324, 0.0641399, 1, 1, 1, 0.698039, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vuvhg"]
+gradient = SubResource("Gradient_xkxf6")
+fill_from = Vector2(1, 0.988604)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yh3p7"]
+frequency = 0.0036
+fractal_type = 3
+fractal_lacunarity = 1.87
+fractal_gain = 1.01
+fractal_ping_pong_strength = 1.795
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rfnrw"]
+noise = SubResource("FastNoiseLite_yh3p7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqnaf"]
+render_priority = 0
+shader = ExtResource("5_etotv")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 30.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/amplitude = 0.1
+shader_parameter/wave_frecuency = 100.0
+shader_parameter/wave_speed = 3.0
+shader_parameter/texture_emission = SubResource("GradientTexture2D_vuvhg")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_rfnrw")
+
+[sub_resource type="SphereMesh" id="SphereMesh_c48gm"]
+material = SubResource("ShaderMaterial_sqnaf")
+radius = 1.5
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d85ms"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t2wo0"]
+material = SubResource("StandardMaterial3D_d85ms")
+radius = 25.0
+height = 50.0
+radial_segments = 759
+rings = 1007
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ab0ly"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.29585
+
+[sub_resource type="SphereMesh" id="SphereMesh_d6hl5"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ab0ly")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tb8v"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.05651
+
+[sub_resource type="SphereMesh" id="SphereMesh_tcplp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4tb8v")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v076l"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.13746
+
+[sub_resource type="SphereMesh" id="SphereMesh_w8hla"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_v076l")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swekl"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.49992
+
+[sub_resource type="SphereMesh" id="SphereMesh_7nkmb"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_swekl")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghqki"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.70122
+
+[sub_resource type="SphereMesh" id="SphereMesh_7nebv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ghqki")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34u3j"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.9192
+
+[sub_resource type="SphereMesh" id="SphereMesh_uqmiy"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_34u3j")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwedx"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.66114
+
+[sub_resource type="SphereMesh" id="SphereMesh_8ydpy"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vwedx")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjm70"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.29939
+
+[sub_resource type="SphereMesh" id="SphereMesh_418op"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tjm70")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wgkjr"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.33883
+
+[sub_resource type="SphereMesh" id="SphereMesh_14vf7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_wgkjr")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ub1kg"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.64284
+
+[sub_resource type="SphereMesh" id="SphereMesh_1ohve"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ub1kg")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11gkb"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.23575
+
+[sub_resource type="SphereMesh" id="SphereMesh_1v6xg"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_11gkb")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnhsv"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.58998
+
+[sub_resource type="SphereMesh" id="SphereMesh_mvpaf"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xnhsv")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0ffw"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.57632
+
+[sub_resource type="SphereMesh" id="SphereMesh_hl2yq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_c0ffw")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmnkd"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.76763
+
+[sub_resource type="SphereMesh" id="SphereMesh_fybky"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_dmnkd")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqoj4"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.75185
+
+[sub_resource type="SphereMesh" id="SphereMesh_td0we"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_uqoj4")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jthuo"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.577
+
+[sub_resource type="SphereMesh" id="SphereMesh_v5uc8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jthuo")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ia8i"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.68948
+
+[sub_resource type="SphereMesh" id="SphereMesh_lr466"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4ia8i")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btnhn"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.14326
+
+[sub_resource type="SphereMesh" id="SphereMesh_e4wyy"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_btnhn")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4f0h"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.13895
+
+[sub_resource type="SphereMesh" id="SphereMesh_tto8l"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_p4f0h")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwnoh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.20467
+
+[sub_resource type="SphereMesh" id="SphereMesh_fekyc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_wwnoh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwwis"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.02207
+
+[sub_resource type="SphereMesh" id="SphereMesh_obr6p"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_uwwis")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flsbr"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.01043
+
+[sub_resource type="SphereMesh" id="SphereMesh_y3nvr"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_flsbr")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fbh3"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.33572
+
+[sub_resource type="SphereMesh" id="SphereMesh_oaole"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2fbh3")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24qm8"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.19413
+
+[sub_resource type="SphereMesh" id="SphereMesh_r6nr7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_24qm8")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8venp"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.69342
+
+[sub_resource type="SphereMesh" id="SphereMesh_g743b"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_8venp")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0750"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.38387
+
+[sub_resource type="SphereMesh" id="SphereMesh_i0d6n"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_w0750")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5utxa"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.28985
+
+[sub_resource type="SphereMesh" id="SphereMesh_3gq6n"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_5utxa")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqm8s"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.23495
+
+[sub_resource type="SphereMesh" id="SphereMesh_fplg6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_sqm8s")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpaee"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.54349
+
+[sub_resource type="SphereMesh" id="SphereMesh_lcfaa"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tpaee")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7n0m"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.42601
+
+[sub_resource type="SphereMesh" id="SphereMesh_7fch7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_h7n0m")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_720q8"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.0231
+
+[sub_resource type="SphereMesh" id="SphereMesh_b5vlw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_720q8")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fuhn"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.11525
+
+[sub_resource type="SphereMesh" id="SphereMesh_2mfiw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1fuhn")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ss7l"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.45454
+
+[sub_resource type="SphereMesh" id="SphereMesh_0urmw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7ss7l")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8pj1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.03605
+
+[sub_resource type="SphereMesh" id="SphereMesh_c05yl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_t8pj1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lt8dy"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.86347
+
+[sub_resource type="SphereMesh" id="SphereMesh_fklxj"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_lt8dy")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xx4k4"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.37173
+
+[sub_resource type="SphereMesh" id="SphereMesh_n6m56"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xx4k4")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7j2d"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.29018
+
+[sub_resource type="SphereMesh" id="SphereMesh_jgqxx"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_f7j2d")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tifel"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.32844
+
+[sub_resource type="SphereMesh" id="SphereMesh_nrq8i"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tifel")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ly8bq"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.00595
+
+[sub_resource type="SphereMesh" id="SphereMesh_sdgq7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ly8bq")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1s1i6"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.79509
+
+[sub_resource type="SphereMesh" id="SphereMesh_8vajh"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1s1i6")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0rnd"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.18765
+
+[sub_resource type="SphereMesh" id="SphereMesh_mayrq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_s0rnd")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23nvq"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.84399
+
+[sub_resource type="SphereMesh" id="SphereMesh_of55n"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_23nvq")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbjrn"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.47291
+
+[sub_resource type="SphereMesh" id="SphereMesh_7xgeu"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kbjrn")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gq52i"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.94883
+
+[sub_resource type="SphereMesh" id="SphereMesh_mapjk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gq52i")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odpa5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.79281
+
+[sub_resource type="SphereMesh" id="SphereMesh_4mvv7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_odpa5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xsgb7"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.26132
+
+[sub_resource type="SphereMesh" id="SphereMesh_m7d8m"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xsgb7")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tw0q7"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.03984
+
+[sub_resource type="SphereMesh" id="SphereMesh_ohlpc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tw0q7")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lqc2"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.23769
+
+[sub_resource type="SphereMesh" id="SphereMesh_ubl5e"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2lqc2")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcxwh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.43374
+
+[sub_resource type="SphereMesh" id="SphereMesh_ojg1f"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xcxwh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwpyy"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.74575
+
+[sub_resource type="SphereMesh" id="SphereMesh_cllto"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_lwpyy")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44cf7"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.72364
+
+[sub_resource type="SphereMesh" id="SphereMesh_4e4ha"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_44cf7")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ada0h"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.17345
+
+[sub_resource type="SphereMesh" id="SphereMesh_n4tux"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ada0h")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fq3oq"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.70414
+
+[sub_resource type="SphereMesh" id="SphereMesh_gxdgp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_fq3oq")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pr17f"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.01761
+
+[sub_resource type="SphereMesh" id="SphereMesh_xmd5j"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_pr17f")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ghjl"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.70984
+
+[sub_resource type="SphereMesh" id="SphereMesh_lbgsr"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_3ghjl")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2gk2"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.20914
+
+[sub_resource type="SphereMesh" id="SphereMesh_ymoem"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_g2gk2")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpa28"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.4177
+
+[sub_resource type="SphereMesh" id="SphereMesh_nhbkl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_fpa28")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tetiv"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.7115
+
+[sub_resource type="SphereMesh" id="SphereMesh_wmlwb"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tetiv")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0244o"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.31272
+
+[sub_resource type="SphereMesh" id="SphereMesh_kk87c"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0244o")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hir3"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.91559
+
+[sub_resource type="SphereMesh" id="SphereMesh_16hyj"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2hir3")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ii1uw"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.86011
+
+[sub_resource type="SphereMesh" id="SphereMesh_gh1fy"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ii1uw")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6o0sq"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.51102
+
+[sub_resource type="SphereMesh" id="SphereMesh_nyd0g"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6o0sq")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mws74"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.44491
+
+[sub_resource type="SphereMesh" id="SphereMesh_exojb"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_mws74")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8j2a6"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.4521
+
+[sub_resource type="SphereMesh" id="SphereMesh_jpkfc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_8j2a6")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t51au"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.04875
+
+[sub_resource type="SphereMesh" id="SphereMesh_yb40v"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_t51au")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kuwjn"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.4632
+
+[sub_resource type="SphereMesh" id="SphereMesh_v1o2p"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kuwjn")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7536p"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.94701
+
+[sub_resource type="SphereMesh" id="SphereMesh_5brch"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7536p")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukmy7"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.86144
+
+[sub_resource type="SphereMesh" id="SphereMesh_t7to4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ukmy7")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwe4e"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.75029
+
+[sub_resource type="SphereMesh" id="SphereMesh_pslni"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kwe4e")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6aaas"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.55774
+
+[sub_resource type="SphereMesh" id="SphereMesh_xw3rf"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6aaas")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7boe"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.02331
+
+[sub_resource type="SphereMesh" id="SphereMesh_mlukm"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_d7boe")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpq6a"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.8876
+
+[sub_resource type="SphereMesh" id="SphereMesh_7h7mc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_wpq6a")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s0pd"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.70818
+
+[sub_resource type="SphereMesh" id="SphereMesh_rf15b"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4s0pd")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bh0lu"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.84324
+
+[sub_resource type="SphereMesh" id="SphereMesh_v3oef"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_bh0lu")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1x6ha"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.12876
+
+[sub_resource type="SphereMesh" id="SphereMesh_p6pn8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1x6ha")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7alub"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.80499
+
+[sub_resource type="SphereMesh" id="SphereMesh_0pgn8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7alub")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46yhy"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.31939
+
+[sub_resource type="SphereMesh" id="SphereMesh_kqh18"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_46yhy")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke3ad"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.91928
+
+[sub_resource type="SphereMesh" id="SphereMesh_2d2ql"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ke3ad")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e48mh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.10622
+
+[sub_resource type="SphereMesh" id="SphereMesh_t4ull"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_e48mh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fibhh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.83424
+
+[sub_resource type="SphereMesh" id="SphereMesh_sumcj"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_fibhh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rehwp"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.17552
+
+[sub_resource type="SphereMesh" id="SphereMesh_7ufxj"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_rehwp")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_poxoc"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.7736
+
+[sub_resource type="SphereMesh" id="SphereMesh_kwgkp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_poxoc")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu0vp"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.49216
+
+[sub_resource type="SphereMesh" id="SphereMesh_dxh3f"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_mu0vp")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nf2h"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.64765
+
+[sub_resource type="SphereMesh" id="SphereMesh_ggxfl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_8nf2h")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00ub1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.71825
+
+[sub_resource type="SphereMesh" id="SphereMesh_aesr2"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_00ub1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6bq6"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.58994
+
+[sub_resource type="SphereMesh" id="SphereMesh_2vxto"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_j6bq6")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u401s"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.12526
+
+[sub_resource type="SphereMesh" id="SphereMesh_4p1tf"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_u401s")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dip41"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.92857
+
+[sub_resource type="SphereMesh" id="SphereMesh_al3m3"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_dip41")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54ws1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.7312
+
+[sub_resource type="SphereMesh" id="SphereMesh_nplbi"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_54ws1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gowo"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.17952
+
+[sub_resource type="SphereMesh" id="SphereMesh_0dvvb"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6gowo")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uturh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.92763
+
+[sub_resource type="SphereMesh" id="SphereMesh_4281b"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_uturh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxsa5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.67595
+
+[sub_resource type="SphereMesh" id="SphereMesh_0lch8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_fxsa5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbib1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.63782
+
+[sub_resource type="SphereMesh" id="SphereMesh_rhy0l"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vbib1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uv68"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.74859
+
+[sub_resource type="SphereMesh" id="SphereMesh_xofqv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_8uv68")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gqw0l"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.79792
+
+[sub_resource type="SphereMesh" id="SphereMesh_t861a"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gqw0l")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dnqk"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.10068
+
+[sub_resource type="SphereMesh" id="SphereMesh_f6382"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_5dnqk")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32iqt"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.79754
+
+[sub_resource type="SphereMesh" id="SphereMesh_kjtct"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_32iqt")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mlidi"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.88909
+
+[sub_resource type="SphereMesh" id="SphereMesh_4eb83"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_mlidi")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fa002"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.24689
+
+[sub_resource type="SphereMesh" id="SphereMesh_h8i8r"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_fa002")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbhmh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.09637
+
+[sub_resource type="SphereMesh" id="SphereMesh_prci2"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_hbhmh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_166ti"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.95158
+
+[sub_resource type="SphereMesh" id="SphereMesh_cp7x4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_166ti")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81lgg"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.81429
+
+[sub_resource type="SphereMesh" id="SphereMesh_n6unt"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_81lgg")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fr3xj"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.41515
+
+[sub_resource type="SphereMesh" id="SphereMesh_ajans"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_fr3xj")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2epxc"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.45071
+
+[sub_resource type="SphereMesh" id="SphereMesh_82o4p"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2epxc")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hy7v"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.91733
+
+[sub_resource type="SphereMesh" id="SphereMesh_0u4f8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_3hy7v")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kogf"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.15385
+
+[sub_resource type="SphereMesh" id="SphereMesh_k33fa"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1kogf")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kj350"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.61022
+
+[sub_resource type="SphereMesh" id="SphereMesh_aygar"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kj350")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4h7hl"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.60485
+
+[sub_resource type="SphereMesh" id="SphereMesh_ibapd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4h7hl")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_217nn"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.46201
+
+[sub_resource type="SphereMesh" id="SphereMesh_qetnd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_217nn")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2btgc"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.63258
+
+[sub_resource type="SphereMesh" id="SphereMesh_8na2d"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2btgc")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52i1y"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.12385
+
+[sub_resource type="SphereMesh" id="SphereMesh_iiwl6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_52i1y")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd4g4"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.06671
+
+[sub_resource type="SphereMesh" id="SphereMesh_7i1di"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xd4g4")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7qn8"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.56475
+
+[sub_resource type="SphereMesh" id="SphereMesh_e3cfq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_k7qn8")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_txwlr"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.40357
+
+[sub_resource type="SphereMesh" id="SphereMesh_ot66m"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_txwlr")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5mne"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.76706
+
+[sub_resource type="SphereMesh" id="SphereMesh_iebhd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_n5mne")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_517g3"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.42109
+
+[sub_resource type="SphereMesh" id="SphereMesh_txuqh"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_517g3")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdoft"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.76211
+
+[sub_resource type="SphereMesh" id="SphereMesh_bt1l5"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_qdoft")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o61q2"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.33007
+
+[sub_resource type="SphereMesh" id="SphereMesh_dnen8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_o61q2")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1twlf"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.68888
+
+[sub_resource type="SphereMesh" id="SphereMesh_8bt2d"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1twlf")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1bvu"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.29761
+
+[sub_resource type="SphereMesh" id="SphereMesh_rwe3w"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_e1bvu")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kenom"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.3692
+
+[sub_resource type="SphereMesh" id="SphereMesh_r43x2"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kenom")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wk0k"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.82175
+
+[sub_resource type="SphereMesh" id="SphereMesh_1cd4j"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1wk0k")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8ufu"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.53013
+
+[sub_resource type="SphereMesh" id="SphereMesh_uc7nw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_e8ufu")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5psb"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.68066
+
+[sub_resource type="SphereMesh" id="SphereMesh_agg1y"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_m5psb")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0b22r"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.58472
+
+[sub_resource type="SphereMesh" id="SphereMesh_4xnbl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0b22r")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y77sl"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.24315
+
+[sub_resource type="SphereMesh" id="SphereMesh_tgycm"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_y77sl")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6ipm"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.21817
+
+[sub_resource type="SphereMesh" id="SphereMesh_0ygj7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_d6ipm")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c674"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.92547
+
+[sub_resource type="SphereMesh" id="SphereMesh_f7ast"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2c674")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gl407"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.76105
+
+[sub_resource type="SphereMesh" id="SphereMesh_acv01"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gl407")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2qgd"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.81852
+
+[sub_resource type="SphereMesh" id="SphereMesh_sqsk3"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_w2qgd")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yg0jh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.25865
+
+[sub_resource type="SphereMesh" id="SphereMesh_fu5re"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_yg0jh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4f44"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.92145
+
+[sub_resource type="SphereMesh" id="SphereMesh_3y5ju"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_k4f44")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_et5kx"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.43449
+
+[sub_resource type="SphereMesh" id="SphereMesh_04r6j"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_et5kx")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8w2om"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.90108
+
+[sub_resource type="SphereMesh" id="SphereMesh_d8l2y"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_8w2om")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djhv5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.35519
+
+[sub_resource type="SphereMesh" id="SphereMesh_x2h1o"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_djhv5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hr3b"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.42941
+
+[sub_resource type="SphereMesh" id="SphereMesh_ggb8y"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1hr3b")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ag3ec"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.20042
+
+[sub_resource type="SphereMesh" id="SphereMesh_y7u5e"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ag3ec")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfj6c"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.87217
+
+[sub_resource type="SphereMesh" id="SphereMesh_kjbik"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jfj6c")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1losj"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.85191
+
+[sub_resource type="SphereMesh" id="SphereMesh_xha0s"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1losj")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ru21"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.61997
+
+[sub_resource type="SphereMesh" id="SphereMesh_6valo"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0ru21")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2rvv"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.51326
+
+[sub_resource type="SphereMesh" id="SphereMesh_rhpy5"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_l2rvv")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpkfb"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.23801
+
+[sub_resource type="SphereMesh" id="SphereMesh_oqtxf"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xpkfb")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owbcy"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.61539
+
+[sub_resource type="SphereMesh" id="SphereMesh_d6cn8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_owbcy")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mr7y"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.2772
+
+[sub_resource type="SphereMesh" id="SphereMesh_w86gq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6mr7y")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n80gt"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.4563
+
+[sub_resource type="SphereMesh" id="SphereMesh_m6bi8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_n80gt")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oddbk"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.94442
+
+[sub_resource type="SphereMesh" id="SphereMesh_l17c5"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_oddbk")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thfuy"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.05307
+
+[sub_resource type="SphereMesh" id="SphereMesh_c8w7v"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_thfuy")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4lc2"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.92386
+
+[sub_resource type="SphereMesh" id="SphereMesh_60xna"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_p4lc2")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6gc6"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.52131
+
+[sub_resource type="SphereMesh" id="SphereMesh_k7tic"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_p6gc6")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sjdm"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.15556
+
+[sub_resource type="SphereMesh" id="SphereMesh_3jcwp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0sjdm")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uxja"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.22236
+
+[sub_resource type="SphereMesh" id="SphereMesh_si18w"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6uxja")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6defa"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.31392
+
+[sub_resource type="SphereMesh" id="SphereMesh_tn61q"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6defa")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2h52"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.33076
+
+[sub_resource type="SphereMesh" id="SphereMesh_pqhsp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_n2h52")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2v04"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.68759
+
+[sub_resource type="SphereMesh" id="SphereMesh_3tnq5"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_a2v04")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vf4n1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.71882
+
+[sub_resource type="SphereMesh" id="SphereMesh_foqxl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vf4n1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1k86i"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.96753
+
+[sub_resource type="SphereMesh" id="SphereMesh_8dp7q"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1k86i")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0awe"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.32362
+
+[sub_resource type="SphereMesh" id="SphereMesh_kp3v4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_n0awe")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0w7m"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.851
+
+[sub_resource type="SphereMesh" id="SphereMesh_0cp5c"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_l0w7m")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10iwe"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.37227
+
+[sub_resource type="SphereMesh" id="SphereMesh_oshlc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_10iwe")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbrcc"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.60915
+
+[sub_resource type="SphereMesh" id="SphereMesh_q8eej"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_pbrcc")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idawr"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.54346
+
+[sub_resource type="SphereMesh" id="SphereMesh_22w0a"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_idawr")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwqqp"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.75832
+
+[sub_resource type="SphereMesh" id="SphereMesh_e8qb6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_iwqqp")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g8rqe"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.32697
+
+[sub_resource type="SphereMesh" id="SphereMesh_efody"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_g8rqe")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sphw1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.89327
+
+[sub_resource type="SphereMesh" id="SphereMesh_xxgyl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_sphw1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xik3s"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.59494
+
+[sub_resource type="SphereMesh" id="SphereMesh_j6fwx"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xik3s")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53pm5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.79202
+
+[sub_resource type="SphereMesh" id="SphereMesh_rgigl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_53pm5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hwefb"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.49493
+
+[sub_resource type="SphereMesh" id="SphereMesh_7vq6p"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_hwefb")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ow4cp"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.94753
+
+[sub_resource type="SphereMesh" id="SphereMesh_3a78h"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ow4cp")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxlyl"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.77606
+
+[sub_resource type="SphereMesh" id="SphereMesh_vao44"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_bxlyl")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjxaa"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.89354
+
+[sub_resource type="SphereMesh" id="SphereMesh_odms0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tjxaa")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15nc6"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.20817
+
+[sub_resource type="SphereMesh" id="SphereMesh_ribdl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_15nc6")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dso5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.80216
+
+[sub_resource type="SphereMesh" id="SphereMesh_hg741"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0dso5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42dfc"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.41532
+
+[sub_resource type="SphereMesh" id="SphereMesh_sqjt4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_42dfc")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4lg5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.90496
+
+[sub_resource type="SphereMesh" id="SphereMesh_7jcf1"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_x4lg5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk44g"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.65329
+
+[sub_resource type="SphereMesh" id="SphereMesh_8h7cd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_rk44g")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbgbo"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.55372
+
+[sub_resource type="SphereMesh" id="SphereMesh_g3hm1"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_lbgbo")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmosj"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.56433
+
+[sub_resource type="SphereMesh" id="SphereMesh_lv4ct"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kmosj")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqy2e"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.15913
+
+[sub_resource type="SphereMesh" id="SphereMesh_2i2qr"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_cqy2e")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8r0ff"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.12163
+
+[sub_resource type="SphereMesh" id="SphereMesh_qbidg"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_8r0ff")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dv8f4"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.75964
+
+[sub_resource type="SphereMesh" id="SphereMesh_ypvln"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_dv8f4")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v83uv"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.30086
+
+[sub_resource type="SphereMesh" id="SphereMesh_cfva6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_v83uv")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xw4i"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.42999
+
+[sub_resource type="SphereMesh" id="SphereMesh_ioqpw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1xw4i")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gqa4"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.10821
+
+[sub_resource type="SphereMesh" id="SphereMesh_y5c6n"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2gqa4")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pd561"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.74728
+
+[sub_resource type="SphereMesh" id="SphereMesh_h1tuv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_pd561")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ncw8"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.76943
+
+[sub_resource type="SphereMesh" id="SphereMesh_si021"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2ncw8")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvawj"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.23952
+
+[sub_resource type="SphereMesh" id="SphereMesh_cy2bg"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_wvawj")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yptv1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.49138
+
+[sub_resource type="SphereMesh" id="SphereMesh_p4sfe"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_yptv1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eup1e"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.74591
+
+[sub_resource type="SphereMesh" id="SphereMesh_vmtl7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_eup1e")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4svw"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.76962
+
+[sub_resource type="SphereMesh" id="SphereMesh_rscmv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_k4svw")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2i4s"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.4083
+
+[sub_resource type="SphereMesh" id="SphereMesh_n52gq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_c2i4s")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ao0v"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.13139
+
+[sub_resource type="SphereMesh" id="SphereMesh_2mn5h"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0ao0v")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqfsv"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.79426
+
+[sub_resource type="SphereMesh" id="SphereMesh_wk7ly"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_tqfsv")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nl1b6"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.14741
+
+[sub_resource type="SphereMesh" id="SphereMesh_l6ehq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_nl1b6")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1qga"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.34998
+
+[sub_resource type="SphereMesh" id="SphereMesh_0c7be"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_g1qga")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svss0"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.91278
+
+[sub_resource type="SphereMesh" id="SphereMesh_n7lii"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_svss0")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjhan"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.88026
+
+[sub_resource type="SphereMesh" id="SphereMesh_1c3cs"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_hjhan")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dv20w"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.80531
+
+[sub_resource type="SphereMesh" id="SphereMesh_pj1kl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_dv20w")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4muo"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.65472
+
+[sub_resource type="SphereMesh" id="SphereMesh_xl7yq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_e4muo")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgea4"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.66017
+
+[sub_resource type="SphereMesh" id="SphereMesh_2567v"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_pgea4")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6t7y"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.72807
+
+[sub_resource type="SphereMesh" id="SphereMesh_h2bay"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_g6t7y")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0j3cn"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.89417
+
+[sub_resource type="SphereMesh" id="SphereMesh_7rqhm"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0j3cn")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ao74"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.1587
+
+[sub_resource type="SphereMesh" id="SphereMesh_nc3yl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7ao74")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ikrjk"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.83768
+
+[sub_resource type="SphereMesh" id="SphereMesh_px3r0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ikrjk")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ojxeh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.40517
+
+[sub_resource type="SphereMesh" id="SphereMesh_ddbox"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ojxeh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ugfnx"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.32386
+
+[sub_resource type="SphereMesh" id="SphereMesh_td30f"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ugfnx")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f06i5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.72264
+
+[sub_resource type="SphereMesh" id="SphereMesh_xs53y"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_f06i5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gq4mp"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.30208
+
+[sub_resource type="SphereMesh" id="SphereMesh_nbc63"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gq4mp")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7yv4b"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.87193
+
+[sub_resource type="SphereMesh" id="SphereMesh_bnbe4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7yv4b")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7reh"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.15678
+
+[sub_resource type="SphereMesh" id="SphereMesh_vumim"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_q7reh")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y15u"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.69016
+
+[sub_resource type="SphereMesh" id="SphereMesh_mqceb"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2y15u")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fgl6"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.68982
+
+[sub_resource type="SphereMesh" id="SphereMesh_ahhqj"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4fgl6")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rirn2"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.25986
+
+[sub_resource type="SphereMesh" id="SphereMesh_1q4pv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_rirn2")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vf5u1"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.25988
+
+[sub_resource type="SphereMesh" id="SphereMesh_r5pvf"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vf5u1")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1f43"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.03206
+
+[sub_resource type="SphereMesh" id="SphereMesh_3s5ii"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_m1f43")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvxaj"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.56771
+
+[sub_resource type="SphereMesh" id="SphereMesh_m71qc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kvxaj")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4i8f"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.6408
+
+[sub_resource type="SphereMesh" id="SphereMesh_ct4gc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_c4i8f")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xwjf"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.16754
+
+[sub_resource type="SphereMesh" id="SphereMesh_apjr2"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4xwjf")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j7u5"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.95821
+
+[sub_resource type="SphereMesh" id="SphereMesh_4y4jx"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4j7u5")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thdfu"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.71735
+
+[sub_resource type="SphereMesh" id="SphereMesh_gu8he"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_thdfu")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lyu0v"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.07839
+
+[sub_resource type="SphereMesh" id="SphereMesh_vik5j"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_lyu0v")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wnj7"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.10913
+
+[sub_resource type="SphereMesh" id="SphereMesh_no1xt"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_3wnj7")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfepf"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.3299
+
+[sub_resource type="SphereMesh" id="SphereMesh_vjllw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jfepf")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uck8w"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.11998
+
+[sub_resource type="SphereMesh" id="SphereMesh_n0rv6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_uck8w")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkvea"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.12166
+
+[sub_resource type="SphereMesh" id="SphereMesh_cwjeh"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_rkvea")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urfow"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.33061
+
+[sub_resource type="SphereMesh" id="SphereMesh_7gw44"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_urfow")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3gav"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.88972
+
+[sub_resource type="SphereMesh" id="SphereMesh_5x010"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_v3gav")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ud1ky"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.18337
+
+[sub_resource type="SphereMesh" id="SphereMesh_42rrv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ud1ky")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpdgg"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.62814
+
+[sub_resource type="SphereMesh" id="SphereMesh_aobqa"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_wpdgg")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_742wm"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 5.60268
+
+[sub_resource type="SphereMesh" id="SphereMesh_iuvv0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_742wm")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8ika"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.70608
+
+[sub_resource type="SphereMesh" id="SphereMesh_420cj"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_w8ika")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xngqw"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.22688
+
+[sub_resource type="SphereMesh" id="SphereMesh_7keu4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xngqw")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqfdq"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(0.227451, 0.470588, 0.835294, 1)
+emission_energy_multiplier = 4.32484
+
+[sub_resource type="SphereMesh" id="SphereMesh_15r3u"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xqfdq")
+radius = 0.25
+height = 0.5
+
+[node name="VoidScene" type="Node3D"]
+script = ExtResource("1_gvpsq")
+orbes_dist = 5.0
+orbes_number = 20
+lines_angle = 5.0
+random_orbes_density = 200
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ru7rd")
+
+[node name="Player" parent="." instance=ExtResource("2_j3o5r")]
+transform = Transform3D(-0.0860082, 0, 0.996294, 0, 1, 0, -0.996294, 0, -0.0860082, 107.389, 0, 0)
+
+[node name="Camera3D" parent="Player/head" index="0"]
+transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0)
+
+[node name="Dream_sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.84513, -1.09782, -1.45267, -1.31534, 1.23459, -9.84862, 1.25954, 9.87469, 1.06985, 0, 16.225, 0)
+mesh = SubResource("SphereMesh_c48gm")
+
+[node name="planet_01" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.077876, -0.253193, -0.00733926, 0.250961, 0.0781656, -0.0336721, 0.0343366, 0.00294484, 0.26275, -50.945, 40, 50)
+layers = 524289
+mesh = SubResource("SphereMesh_t2wo0")
+
+[node name="OmniLight3D" type="SpotLight3D" parent="planet_01"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 50, 0, 0)
+light_color = Color(0.492547, 0.770966, 0.829359, 1)
+light_energy = 10.0
+spot_range = 67.2026
+
+[node name="Orbes Container" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Line_01" type="Node3D" parent="Orbes Container"]
+transform = Transform3D(0.996195, 0, 0.0871558, 0, 1, 0, -0.0871558, 0, 0.996195, 0, 0, 0)
+
+[node name="Orbe" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.791238, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_d6hl5")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48049" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -0.140797, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_tcplp")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48051" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -0.294056, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_w8hla")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48053" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -0.000346899, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7nkmb")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48055" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -0.693276, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7nebv")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48057" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, -0.955567, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_uqmiy")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48059" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.530515, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_8ydpy")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48061" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -0.934464, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_418op")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48063" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -0.149056, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_14vf7")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48065" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -0.681766, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_1ohve")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48067" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0.653889, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_1v6xg")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48069" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, -0.143962, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_mvpaf")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48071" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0.630996, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_hl2yq")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48073" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, -0.54612, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_fybky")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48075" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0.648118, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_td0we")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48077" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 0.310375, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_v5uc8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48079" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, -0.696308, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_lr466")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48081" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 0.0295156, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_e4wyy")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48083" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0.936956, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_tto8l")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48085" type="MeshInstance3D" parent="Orbes Container/Line_01" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, -0.80666, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_fekyc")
+script = ExtResource("6_lcrpy")
+
+[node name="Line_02" type="Node3D" parent="Orbes Container"]
+transform = Transform3D(0.996195, 0, -0.0871558, 0, 1, 0, 0.0871558, 0, 0.996195, 0, 0, 0)
+
+[node name="Orbe" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -0.0642161, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_obr6p")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48050" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -0.890361, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_y3nvr")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48052" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -0.160095, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_oaole")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48054" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -0.0577746, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_r6nr7")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48056" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -0.40257, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_g743b")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48058" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, -0.408593, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_i0d6n")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48060" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.309144, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_3gq6n")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48062" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0.00943532, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_fplg6")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48064" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -0.166281, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_lcfaa")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48066" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -0.363601, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7fch7")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48068" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0.500457, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_b5vlw")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48070" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 0.588972, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_2mfiw")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48072" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 1.00027, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0urmw")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48074" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, -0.948188, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_c05yl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48076" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, -0.706307, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_fklxj")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48078" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 0.820536, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_n6m56")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48080" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 1.01373, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_jgqxx")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48082" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 0.102481, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_nrq8i")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48084" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -0.924019, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_sdgq7")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48086" type="MeshInstance3D" parent="Orbes Container/Line_02" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 0.503808, 0)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_8vajh")
+script = ExtResource("6_lcrpy")
+
+[node name="Random" type="Node3D" parent="Orbes Container"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Orbe" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.0418, 0.00446157, -31.6859)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_mayrq")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48087" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.507, 0.000751297, -61.7373)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_of55n")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48088" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0175, 0.00929268, -48.3273)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7xgeu")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48089" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4712, 0.020407, -85.7805)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_mapjk")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48090" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4101, 0.0181222, 11.6098)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_4mvv7")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48091" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2102, 0.0184476, -55.8599)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_m7d8m")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48092" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.5937, 0.0196349, -11.0541)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ohlpc")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48093" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4933, 0.0201502, 96.2354)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ubl5e")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48094" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9396, 0.0160776, 21.7318)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ojg1f")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48095" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99074, 0.00176137, 12.6774)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_cllto")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48096" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3319, 0.0174469, 22.0583)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_4e4ha")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48097" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.522, 0.0167633, -2.5876)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_n4tux")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48098" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.53748, 0.0200755, -21.242)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_gxdgp")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48099" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.02614, -9.84405e-05, 5.40409)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_xmd5j")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48100" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5949, 0.0118717, 62.6334)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_lbgsr")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48101" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59925, -0.00201944, -2.09278)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ymoem")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48102" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.92497, 0.0116123, 0.0731173)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_nhbkl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48103" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.3742, -0.00157107, -14.5154)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_wmlwb")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48104" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.932, 0.00675372, 13.6334)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_kk87c")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48105" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.659, 0.0190185, 10.9592)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_16hyj")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48106" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.9773, -0.00155912, -4.82465)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_gh1fy")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48107" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1683, 0.0183418, 64.4361)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_nyd0g")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48108" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.7984, 0.00933636, 29.3414)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_exojb")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48109" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3484, 0.0203084, 52.3843)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_jpkfc")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48110" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5555, -0.00034137, -74.6642)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_yb40v")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48111" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2236, 0.0186044, -22.2703)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_v1o2p")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48112" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7111, 0.0169926, -54.9745)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_5brch")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48113" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8825, 0.00661891, 43.118)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_t7to4")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48114" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9848, 0.0193612, -21.2398)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_pslni")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48115" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.317453, 0.00457749, -20.9022)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_xw3rf")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48116" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8082, 0.0189579, -5.48635)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_mlukm")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48117" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.21942, 0.019994, -22.5503)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7h7mc")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48118" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5592, 0.0148935, 1.16425)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_rf15b")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48119" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.763, 0.0104055, -13.0363)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_v3oef")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48120" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8012, -0.00201473, -17.8664)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_p6pn8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48121" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2806, 0.0145661, -26.9794)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0pgn8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48122" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5889, 0.020121, -41.7091)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_kqh18")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48123" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.0154, 0.0134709, -93.8089)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_2d2ql")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48124" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.4275, 0.0200884, -4.21526)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_t4ull")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48125" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9273, 0.0200838, -24.3435)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_sumcj")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48126" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1085, 0.00600428, -3.73984)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7ufxj")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48127" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4364, 0.0150852, 33.2607)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_kwgkp")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48128" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1907, 0.000870738, 13.4667)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_dxh3f")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48129" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99495, 0.0122839, -5.76941)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ggxfl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48130" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.4394, -0.00143291, 10.6774)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_aesr2")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48131" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.023, 0.0200829, 38.6834)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_2vxto")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48132" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.4277, 0.00778797, 13.8275)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_4p1tf")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48133" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.3724, 0.0122822, -10.1471)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_al3m3")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48134" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9104, -0.00231705, 35.0621)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_nplbi")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48135" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2641, 0.0084438, 61.6784)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0dvvb")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48136" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.336, 0.011407, -20.8703)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_4281b")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48137" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2927, 0.000573765, -18.9938)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0lch8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48138" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.80498, -0.0012372, 15.3651)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_rhy0l")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48139" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5121, 0.00227364, -15.609)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_xofqv")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48140" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2825, -0.000137928, 15.8748)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_t861a")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48141" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.6155, 0.0170492, 22.4352)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_f6382")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48142" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7428, 0.00166774, -9.77153)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_kjtct")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48143" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.16635, 0.0118955, 27.1981)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_4eb83")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48144" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.312, -0.000413475, -41.0528)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_h8i8r")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48145" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1217, 0.0143621, -5.01638)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_prci2")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48146" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8421, 0.0140063, 74.6752)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_cp7x4")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48147" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.68469, 0.00752805, 20.1326)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_n6unt")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48148" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.87242, 0.0196498, 14.9658)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ajans")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48149" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.2303, 0.018869, -72.6106)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_82o4p")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48150" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.9227, 0.0179633, 67.1304)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0u4f8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48151" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.588, 0.00690264, 86.1058)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_k33fa")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48152" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4504, 0.0135235, 18.9417)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_aygar")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48153" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.85198, 0.0116751, -3.78631)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ibapd")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48154" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.691, 0.000332792, -5.9463)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_qetnd")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48155" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.94572, 0.000828541, 4.85465)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_8na2d")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48156" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.3934, 0.00954199, -21.0901)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_iiwl6")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48157" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3951, 0.0200897, -73.8377)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7i1di")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48158" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.05293, 0.0162263, 1.27342)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_e3cfq")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48159" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.988, 0.0159493, -52.6882)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ot66m")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48160" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.3361, 0.000798944, -75.1876)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_iebhd")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48161" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1216, 0.000329867, -18.4168)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_txuqh")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48162" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.67797, -0.000407786, 1.38811)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_bt1l5")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48163" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.6988, 0.0186088, 15.4411)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_dnen8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48164" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2203, 0.00273396, 5.71474)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_8bt2d")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48165" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15806, 0.00331626, -8.95032)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_rwe3w")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48166" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.4072, 0.00283682, 31.9414)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_r43x2")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48167" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.546, 0.00243501, -9.05337)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_1cd4j")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48168" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.6645, 0.00975309, -50.1053)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_uc7nw")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48169" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.7305, 0.0205657, -75.7268)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_agg1y")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48170" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.2324, 0.00710632, -32.8969)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_4xnbl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48171" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4128, 0.0153311, 51.0068)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_tgycm")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48172" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.3009, 0.0169137, -34.8239)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0ygj7")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48173" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.7461, 0.00054432, 53.1532)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_f7ast")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48174" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.71235, 0.0156759, 10.9987)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_acv01")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48175" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.7588, 0.000631096, -16.1316)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_sqsk3")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48176" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.7557, 0.0184083, -3.63168)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_fu5re")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48177" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0051, 0.0202961, 23.31)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_3y5ju")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48178" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0537, 0.0134173, -47.1879)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_04r6j")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48179" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8072, 0.0157699, -7.73655)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_d8l2y")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48180" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.2565, 0.00470128, -55.8429)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_x2h1o")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48181" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.6713, 0.00326258, 56.0865)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ggb8y")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48182" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.9704, 0.0169095, -25.5173)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_y7u5e")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48183" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.499, 0.00149627, -1.70799)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_kjbik")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48184" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.603, 0.00725554, -7.03981)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_xha0s")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48185" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.09586, -0.00146711, -26.1977)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_6valo")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48186" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.0095, 0.00549879, -38.6429)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_rhpy5")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48187" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.064, -0.00201603, -38.7173)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_oqtxf")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48188" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5043, 0.0132271, -22.372)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_d6cn8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48189" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3227, 0.0180544, 72.2473)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_w86gq")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48190" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2378, 0.00508879, 11.0897)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_m6bi8")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48191" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.9816, 0.0194773, 45.2659)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_l17c5")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48192" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.4424, 0.0174387, 34.4824)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_c8w7v")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48193" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.9686, 0.020012, 30.8004)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_60xna")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48194" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.15392, -0.000430373, -3.82863)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_k7tic")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48195" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.3011, 0.00201719, -88.4018)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_3jcwp")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48196" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.8173, 0.0160485, -52.8684)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_si18w")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48197" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65033, 0.00910023, -81.6915)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_tn61q")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48198" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.0715, 0.0167488, 57.8248)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_pqhsp")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48199" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7407, 0.0129731, 30.3344)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_3tnq5")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48200" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1522, 0.0130269, 87.7328)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_foqxl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48201" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.032, 0.0104649, -1.70331)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_8dp7q")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48202" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7849, 0.0164627, 1.28666)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_kp3v4")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48203" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0086, 0.0151904, -6.73905)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0cp5c")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48204" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.9589, 0.0160567, 28.4271)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_oshlc")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48205" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.21924, 0.0116844, 35.4421)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_q8eej")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48206" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.6107, 0.00656552, 82.1852)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_22w0a")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48207" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.6521, 0.0121352, 71.5845)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_e8qb6")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48208" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.749, 0.0182829, 57.6818)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_efody")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48209" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.7071, 0.0035475, 52.8894)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_xxgyl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48210" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.3652, -0.00141456, 12.357)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_j6fwx")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48211" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.12141, 0.00114603, -56.9549)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_rgigl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48212" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.17537, 0.0158456, -8.48362)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7vq6p")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48213" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.1347, 0.00160685, 48.0252)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_3a78h")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48214" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8798, 0.0202124, -5.33852)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_vao44")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48215" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.3909, 0.0180128, -32.1841)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_odms0")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48216" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.967, 0.00308584, 36.2533)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ribdl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48217" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26878, 0.000222279, -88.5213)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_hg741")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48218" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50463, 0.0199454, 1.24952)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_sqjt4")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48219" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.61601, 0.000289366, -36.0076)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7jcf1")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48220" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.5877, 0.0023375, -21.0426)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_8h7cd")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48221" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22426, 0.0162889, -10.9373)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_g3hm1")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48222" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0229, -0.00142934, 14.5121)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_lv4ct")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48223" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.81901, 0.0187396, -83.7792)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_2i2qr")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48224" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.9575, 0.00178207, -34.7807)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_qbidg")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48225" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2196, 0.0105851, 13.8648)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ypvln")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48226" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89.7257, -0.00113523, 37.0413)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_cfva6")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48227" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.2549, 0.0191854, -36.0955)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ioqpw")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48228" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.6949, 0.00938467, -2.95451)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_y5c6n")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48229" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.9975, 0.0202577, -60.946)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_h1tuv")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48230" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.65543, 0.0164398, -11.9983)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_si021")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48231" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8117, 0.0095518, 5.89513)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_cy2bg")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48232" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.4765, -0.000431372, -4.63987)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_p4sfe")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48233" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.9233, 0.0127238, -2.86938)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_vmtl7")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48234" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.1532, 0.0104238, -16.0456)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_rscmv")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48235" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135881, 0.000732014, -48.9357)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_n52gq")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48236" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531209, 0.0173269, -19.2013)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_2mn5h")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48237" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.4929, 0.0122747, -66.6764)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_wk7ly")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48238" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89.2975, 0.00852628, 41.3926)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_l6ehq")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48239" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.8134, 0.0183327, -3.56171)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_0c7be")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48240" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.2763, 0.00235944, 55.194)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_n7lii")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48241" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8706, -0.00089718, 35.9863)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_1c3cs")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48242" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3298, 0.00281762, -3.24267)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_pj1kl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48243" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4852, -0.00078057, 18.3846)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_xl7yq")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48244" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.8299, 0.00204255, 84.8859)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_2567v")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48245" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47673, 0.00908136, 4.10772)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_h2bay")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48246" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.8962, 0.000528451, 31.5224)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7rqhm")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48247" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3749, 0.00397171, 12.3304)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_nc3yl")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48248" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.1319, 0.0138231, 11.3555)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_px3r0")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48249" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5236, 0.0135889, 85.801)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ddbox")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48250" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.368, 0.00389767, -82.1473)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_td30f")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48251" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.5359, 0.0130117, 2.09156)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_xs53y")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48252" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.2956, 0.0142283, 2.23206)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_nbc63")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48253" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7706, -0.000114471, -15.7326)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_bnbe4")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48254" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.7429, 0.0167466, 66.674)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_vumim")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48255" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8153, 0.0179706, -42.173)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_mqceb")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48256" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.5308, 0.0192413, -55.5412)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ahhqj")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48257" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.5604, 0.00655335, 53.8283)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_1q4pv")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48258" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.3022, 0.0083863, 19.2579)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_r5pvf")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48259" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.13209, -0.000827808, 10.2904)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_3s5ii")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48260" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.4805, 0.00712867, 36.6035)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_m71qc")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48261" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.3967, -0.00123755, 41.5096)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_ct4gc")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48262" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1637, 0.0075275, -33.9006)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_apjr2")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48263" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1526, 0.00992164, -62.8247)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_4y4jx")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48264" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.50389, 0.0182203, 7.91795)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_gu8he")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48265" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.1619, 0.0177501, -89.2298)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_vik5j")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48266" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8371, 0.00741357, -81.834)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_no1xt")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48267" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.54371, -0.000593528, 2.22118)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_vjllw")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48268" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.9971, 0.017346, 8.74219)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_n0rv6")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48269" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.572, 0.00960617, 57.7872)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_cwjeh")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48270" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.9872, 0.00920935, -40.1748)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7gw44")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48271" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.5791, 0.0141601, -23.8378)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_5x010")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48272" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.7076, 0.00652289, 57.9633)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_42rrv")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48273" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.13, 0.00304039, -6.40204)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_aobqa")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48274" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.7149, 0.012865, 31.3955)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_iuvv0")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48275" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48147, 0.0155943, -8.14665)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_420cj")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48276" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6333, -0.00213948, -13.8746)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_7keu4")
+script = ExtResource("6_lcrpy")
+
+[node name="@MeshInstance3D@48277" type="MeshInstance3D" parent="Orbes Container/Random" instance=ExtResource("5_plx1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.7465, -0.0019909, 25.807)
+extra_cull_margin = 5.0
+mesh = SubResource("SphereMesh_15r3u")
+script = ExtResource("6_lcrpy")
+
+[node name="Background_Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xd08m")
+volume_db = -8.32114
+autoplay = true
+
+[node name="Dream_esphere_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oxtuh")
+volume_db = -4.02926
+pitch_scale = 0.7
+autoplay = true
+
+[node name="CSGBox3D" parent="." instance=ExtResource("3_rw22d")]
+
+[connection signal="property_list_changed" from="." to="." method="_on_property_list_changed"]
+
+[editable path="Player"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cnthmff1nisi4"
+path="res://.godot/imported/Hollow Knight OST - Abyss.mp3-337bb03c05371cbdeec3af85ec2d58cd.mp3str"
+
+[deps]
+
+source_file="res://levels/Hollow Knight OST - Abyss.mp3"
+dest_files=["res://.godot/imported/Hollow Knight OST - Abyss.mp3-337bb03c05371cbdeec3af85ec2d58cd.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

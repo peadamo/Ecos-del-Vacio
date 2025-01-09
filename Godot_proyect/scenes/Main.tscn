@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://tvfjvu3kewnu"]
+
+[ext_resource type="PackedScene" uid="uid://7p8flby2hnw" path="res://levels/VoidScene.tscn" id="1_38gm1"]
+
+[node name="Main" type="Node3D"]
+
+[node name="VoidScene" parent="." instance=ExtResource("1_38gm1")]

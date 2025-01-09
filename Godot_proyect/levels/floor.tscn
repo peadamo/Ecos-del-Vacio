@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://4xffw2f0b0tx"]
+
+[ext_resource type="Shader" uid="uid://cgb6d5o7yn7ud" path="res://levels/floor_with_waves.tres" id="1_kncgi"]
+[ext_resource type="Texture2D" uid="uid://bgpg4diplllkp" path="res://levels/metal_plate_02_nor_dx_2k.png" id="1_qjlpn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnufw"]
+render_priority = 0
+shader = ExtResource("1_kncgi")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 1.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(50, 50, 50)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/amplitude = 2.0
+shader_parameter/wave_frecuency = 3.0
+shader_parameter/wave_speed = 1.0
+shader_parameter/texture_normal = ExtResource("1_qjlpn")
+
+[node name="CSGBox3D" type="CSGBox3D"]
+use_collision = true
+size = Vector3(1000, 1, 1000)
+material = SubResource("ShaderMaterial_bnufw")

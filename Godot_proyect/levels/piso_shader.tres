@@ -1,0 +1,56 @@
+[gd_resource type="Shader" format=3 uid="uid://cifti27q0q5ro"]
+
+[resource]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform sampler2D texture_normal : hint_roughness_normal, filter_linear_mipmap, repeat_enable;
+uniform float normal_scale : hint_range(-16.0, 16.0);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+uniform float distortion_strength : hint_range(0.0, 1.0, 0.01);
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform float time_scale : hint_range(0.0, 5.0) = 1.0;
+uniform sampler2D noise_texture : source_color, hint_default_black, filter_linear_mipmap, repeat_enable;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+    // Calculamos las coordenadas UV de la distorsión
+    vec2 distorted_uv = UV;
+    vec3 normal = normalize(NORMAL);
+    
+    // Aplicamos la textura de ruido
+    vec2 noise = texture(noise_texture, UV + vec2(TIME * time_scale)).rg * 2.0 - 1.0;
+
+    // Distorsionamos las UV en base a las normales y el ruido
+    distorted_uv += noise.xy * distortion_strength * normal.xz;
+
+    // Calculamos el color final
+    vec3 reflection_color = texture(SCREEN_TEXTURE, distorted_uv).rgb; // Reflejo distorsionado
+    vec3 final_color = mix(ALBEDO, reflection_color, 0.81);
+
+    ALBEDO = final_color;
+    ROUGHNESS = 0.05; // Mantiene un aspecto reflectante
+}
+"
